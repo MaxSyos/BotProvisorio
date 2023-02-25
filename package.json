@@ -1,0 +1,28 @@
+{
+  "name": "backnode",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "dev": "npx nodemon strategy/Kucoin.js",
+    "start": "forever -r dotenv/config server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "ccxt": "^2.8.16",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.18.1",
+    "forever": "^4.0.3",
+    "netlify-lambda": "^2.0.15",
+    "serverless-http": "^3.0.2",
+    "ta.js": "^1.10.2"
+  },
+  "engines ": {
+    "node": "^v16.14.0",
+    "npm": "^v8.3.1"
+  }
+}
