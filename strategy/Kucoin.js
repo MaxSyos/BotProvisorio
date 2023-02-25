@@ -3,8 +3,6 @@ var config = require('../config');
 var ta = require('ta.js')
 const axios = require('axios');
 const cors = require('cors');
-const serverless = require("serverless-http");
-
 
 
 async function pullBack() {
@@ -85,7 +83,6 @@ async function pullBack() {
         moment: trades[0].datetime,
     }
 
-
     if (lado === "buy" && ativo === 'ADA3L/USDT' && (0.999999 < (ADA3LTotal * close[0]))) {
         comprado = true;
         console.log('Comprado em ADA3L');
@@ -105,7 +102,7 @@ async function pullBack() {
         console.log("Fechamento do trade")
         var sell = exchange.createMarketSellOrder('ADA3L/USDT', ADA3LTotal);
     }
-    
+
 }
 
 module.exports =  { pullBack } ;
