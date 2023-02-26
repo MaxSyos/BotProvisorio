@@ -5,7 +5,7 @@ const axios = require('axios');
 const cors = require('cors');
 
 async function pullBack() {
-    
+     
     console.log('');
 
     /* SYSTEM */
@@ -67,7 +67,7 @@ async function pullBack() {
     /* MOMENTO DO TRADE */
     const timer = (1000 * 60 * 15);
     const tstamp = ((trades[0].timestamp)+timer);
-    const current = (data.map(candleO => (candleO[0]))).reverse();
+    const current = (data.map(candle => (candle[0]))).reverse();
     const currentCandle = current[0]
 
     /* REGISTRO DE MAREGM LIVRE */
@@ -85,11 +85,11 @@ async function pullBack() {
 
     if (lado === "buy" && ativo === 'ADA3L/USDT' && (0.999999 < (ADA3LTotal * close[0]))) {
         comprado = true;
-        console.log(`Comprado em ${config.SYMBOL}` );
+        console.log(`Comprado em ${config.SYMBOL} no preço ${medianPrice} ` );
         console.log(`Profit em ${Profit}`);
 
     } else {
-        console.log(`Última venda em ${groundZero}`);
+        console.log(`Última venda em ${trades.find(trades => trades.side === 'sell').price} no tempo ${groundZero}`);
     }
 
     /* ESTATÉGIAS , CONDIÇÕES E ORDENS  */
@@ -103,15 +103,16 @@ async function pullBack() {
         var sell = exchange.createMarketSellOrder('ADA3L/USDT', ADA3LTotal);
     }
 
-    console.log('')
-    console.log('candle atual',currentCandle)
-    console.log('')
-    console.log('ultima compra', point[0].timestamp)
-    console.log('')
-    console.log('ultima venda', groundZero)
+    const ultimoCandle = `${currentCandle}`
+    const ultimaVenda = `${groundZero}`
+    const ultimoCompra = `${point[0].price}`
+    const horaCompra = `${point[0].timestamp}`
+    const estado = comprado ? `Está comprado em ADA3L e o profit em ${Profit}` : 'Está esperando oportunidade';
+
 }
 
-module.exports =  { pullBack } ;
+pullBack();
 
 setInterval(pullBack, config.CRAWLER_INTERVAL);
 
+module.exports =  { pullBack } ;
