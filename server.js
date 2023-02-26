@@ -18,7 +18,7 @@ app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
     res.header("Access-Control-Allow-Headers", "X-PINGOTHER, Content-Type, Authorization");
-    res.status(200).send({ message: 'Aplicativo em atividade' });
+    res.status(200).send({ message: `Aplicativo em atividade ${pulBack.pullBack()}` });
     app.use(cors());
     next();
 });

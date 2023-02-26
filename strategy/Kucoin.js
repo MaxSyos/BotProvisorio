@@ -4,9 +4,6 @@ var ta = require('ta.js')
 const axios = require('axios');
 const cors = require('cors');
 
-
-
-
 async function pullBack() {
     
     console.log('');
@@ -92,7 +89,7 @@ async function pullBack() {
         console.log(`Profit em ${Profit}`);
 
     } else {
-        console.log(`Última venda em ${trades[0].price}`);
+        console.log(`Última venda em ${groundZero}`);
     }
 
     /* ESTATÉGIAS , CONDIÇÕES E ORDENS  */
@@ -106,9 +103,15 @@ async function pullBack() {
         var sell = exchange.createMarketSellOrder('ADA3L/USDT', ADA3LTotal);
     }
 
-        console.log(currentCandle )
+    console.log('')
+    console.log('candle atual',currentCandle)
+    console.log('')
+    console.log('ultima compra', point[0].timestamp)
+    console.log('')
+    console.log('ultima venda', groundZero)
 }
 
 module.exports =  { pullBack } ;
 
 setInterval(pullBack, config.CRAWLER_INTERVAL);
+
