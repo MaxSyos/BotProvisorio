@@ -13,16 +13,15 @@ const serverless = require("serverless-http");
 const app = express();
 const port = process.env.PORT || 3001 ;
 
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
-    res.header("Access-Control-Allow-Headers", "X-PINGOTHER, Content-Type, Authorization");
-    app.use(cors());
-    next();
-});
+// app.use((req, res, next) => {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
+//     res.header("Access-Control-Allow-Headers", "X-PINGOTHER, Content-Type, Authorization");
+//     app.use(cors());
+//     next();
+// });
 
 async function PortOpen() {
-
      
     console.log('');
 
@@ -128,25 +127,25 @@ async function PortOpen() {
     const estado = comprado ? `Está comprado em ADA3L e o profit em ${Profit}` : 'Está esperando oportunidade';
 
     app.get('/', async(req, res) => {
-        return res.json({
+        return res.send({
             erro: false,
             datahome: {
-                ultimoCandle,
+               ultimoCandle,
                 ultimaVenda,
                 ultimoCompra,
                 horaCompra,
-                estado
+                estado 
             }
         });
     });
 }
 
-
 module.exports =  { PortOpen } ;
 
+PortOpen();
+
+setInterval(PortOpen, config.CRAWLER_INTERVAL);
 
 app.listen(port, () => {
     console.log(`Servidor iniciado na porta: ${port}`);
 });
-
-setInterval(PortOpen, config.CRAWLER_INTERVAL);
