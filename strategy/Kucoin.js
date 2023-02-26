@@ -5,6 +5,8 @@ const axios = require('axios');
 const cors = require('cors');
 
 
+
+
 async function pullBack() {
     
     console.log('');
@@ -66,9 +68,10 @@ async function pullBack() {
     const crossunder = (fastMedian[1] < slowMedian[1] && fastMedian[2] > slowMedian[2]);
 
     /* MOMENTO DO TRADE */
-    const timer = (1000 * 60 * 29);
+    const timer = (1000 * 60 * 15);
     const tstamp = ((trades[0].timestamp)+timer);
-    const currentCandle = data[0][0]
+    const current = (data.map(candleO => (candleO[0]))).reverse();
+    const currentCandle = current[0]
 
     /* REGISTRO DE MAREGM LIVRE */
     const lado = trades[0].side;
@@ -85,11 +88,11 @@ async function pullBack() {
 
     if (lado === "buy" && ativo === 'ADA3L/USDT' && (0.999999 < (ADA3LTotal * close[0]))) {
         comprado = true;
-        console.log('Comprado em ADA3L');
+        console.log(`Comprado em ${config.SYMBOL}` );
         console.log(`Profit em ${Profit}`);
 
     } else {
-        vendido = false;
+        console.log(`Última venda em ${trades[0].price}`);
     }
 
     /* ESTATÉGIAS , CONDIÇÕES E ORDENS  */
@@ -103,6 +106,7 @@ async function pullBack() {
         var sell = exchange.createMarketSellOrder('ADA3L/USDT', ADA3LTotal);
     }
 
+        console.log(currentCandle )
 }
 
 module.exports =  { pullBack } ;
