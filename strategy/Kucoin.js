@@ -40,7 +40,7 @@ async function pullBack() {
     const USDTFree = saldo.free['USDT'];
     const ADA3LTotal = saldo.total['ADA3L'];
     const BTCtotal = saldo.total['BTC'];
-    const amountUSDT = 1.1
+    const amountUSDT = (0.6/close[0])
 
     /* CRIAÇÃO DE PROFITS */
     const trades = (await exchange.fetchMyTrades('ADA3L/USDT')).reverse();
@@ -57,7 +57,7 @@ async function pullBack() {
 
     const medianPrice = sum / n
 
-    const Profit = (medianPrice * 1.02);
+    const Profit = (medianPrice * 1.025);
 
 
     /* CRUZAMENTO DE MEDIAS */
